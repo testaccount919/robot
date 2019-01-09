@@ -217,8 +217,9 @@ class Robot_Cleaner {
     $this->battery -= Constants::COMMANDS_COST['ADVANCE'];
     $nextPosX = $this->posX + $this->directionX;
     $nextPosY = $this->posY + $this->directionY;
-    if ($this->checkIfPositionIsInvalid($nextPosX,$nextPosY)) {
+    if ($this->checkIfPositionIsInvalid($nextPosX, $nextPosY)) {
       $this->obstacleAvoidance();
+
       return;
     }
     $this->currentObstacleAvoidancePattern = 0;
@@ -238,7 +239,7 @@ class Robot_Cleaner {
     }
     $nextPosX = $this->posX - $this->directionX;
     $nextPosY = $this->posY - $this->directionY;
-    if ($this->checkIfPositionIsInvalid($nextPosX,$nextPosY)) {
+    if ($this->checkIfPositionIsInvalid($nextPosX, $nextPosY)) {
       return;
     }
     $this->posX -= $this->directionX;
@@ -288,10 +289,11 @@ class Robot_Cleaner {
    * @return bool
    * @throws Exception
    */
-  private function checkIfPositionIsInvalid(int $x, int $y) : bool {
-    if (isset($this->map[$y][$x]) && !in_array($this->map[$y][$x], Constants::VALID_MAP_DESIGNATIONS)){
+  private function checkIfPositionIsInvalid(int $x, int $y): bool {
+    if (isset($this->map[$y][$x]) && !in_array($this->map[$y][$x], Constants::VALID_MAP_DESIGNATIONS)) {
       throw new Exception('Map designation invalid!');
     }
+
     return (!isset($this->map[$y][$x]) || $this->map[$y][$x] == null ||
             $this->map[$y][$x] == 'C');
 
@@ -306,10 +308,9 @@ class Robot_Cleaner {
    * @throws Exception
    */
   private function checkIfFacingIsValid(string $facing) {
-      if (!array_key_exists($facing, Constants::FACING))
-      {
-        throw new Exception('Invalid facing direction!');
-      }
+    if (!array_key_exists($facing, Constants::FACING)) {
+      throw new Exception('Invalid facing direction!');
+    }
   }
 
   /**
